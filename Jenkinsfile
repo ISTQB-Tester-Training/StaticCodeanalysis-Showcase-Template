@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
 
-                git 'https://github.com/ISTQB-Tester-Training/TDD-Showcase-<Kursbezeichnung>.git'
+                git 'https://github.com/ISTQB-Tester-Training/StaticCodeanalysis-Showcase-Template.git'
 
                 sh "mvn compile"
             }
