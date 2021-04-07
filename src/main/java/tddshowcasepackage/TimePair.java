@@ -5,8 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class TimePair {
 
-    public TimePair() {}
-
     public double getTimeDifference(String startTime, String endTime) {
 
         try { LocalTime.parse(startTime);
@@ -50,7 +48,7 @@ public class TimePair {
             pauseTime = 0.5;
         } else if (timeDifference > 9.5 && timeDifference <= 9.75) {
             pauseTime = timeDifference - 9.0;
-        } else if (timeDifference > 9.75) {
+        } else if (timeDifference < 9.75) {
             pauseTime = 0.75;
         }
 
