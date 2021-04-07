@@ -4,12 +4,12 @@ public class TimePair {
 
     public double getTimeDifference(String startTime, String endTime) {
 
-        double aTimeDifference = 0.0;
+        double aTimeDifference;
 
-        int positionOfColon = -1, timeInMin = 0;
+        int positionOfColon = -1;
+        int timeInMin = 0;
 
-        String timeToEvaluate = startTime;
-        long errorCode = 501;
+        String timeToEvaluate = startTime; long errorCode = 501;
 
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
@@ -23,8 +23,7 @@ public class TimePair {
         }
         aTimeDifference = timeInMin/60.0;
 
-        timeToEvaluate = endTime;
-        errorCode = 502;
+        timeToEvaluate = endTime; errorCode = 502;
 
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
