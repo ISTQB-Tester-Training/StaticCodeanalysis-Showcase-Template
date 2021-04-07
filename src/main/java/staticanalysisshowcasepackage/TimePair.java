@@ -4,33 +4,39 @@ public class TimePair {
 
     public double getTimeDifference(String startTime, String endTime) {
 
-        double aTimeDifference;
+        double aTimeDifference = 0.0;
 
-        int positionOfColon = -1, startTimeMin = 0, endTimeMin = 0;
+        int positionOfColon = -1, timeInMin = 0;
 
-        try {
-            positionOfColon = startTime.indexOf(':');
-            if (positionOfColon > 0) {
-                int startTimeHH = Integer.parseInt(startTime.substring(0, positionOfColon));
-                int startTimeMM = Integer.parseInt(startTime.substring(positionOfColon + 1));
-                startTimeMin = startTimeHH*60 + startTimeMM;
-            }
-        } catch (Exception e) {
-            throw new TimePairException(e.getMessage() + "(Input value: " + startTime + ")", 501);
-        }
+        String timeToEvaluate = startTime;
+        long errorCode = 501;
 
         try {
-            positionOfColon = startTime.indexOf(':');
+            positionOfColon = timeToEvaluate.indexOf(':');
             if (positionOfColon > 0) {
-                int endTimeHH = Integer.parseInt(endTime.substring(0, positionOfColon));
-                int endTimeMM = Integer.parseInt(endTime.substring(positionOfColon + 1));
-                endTimeMin = endTimeHH*60 +  endTimeMM;
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
+                int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
+                timeInMin = timeHH*60 + timeMM;
             }
         } catch (Exception e) {
-            throw new TimePairException(e.getMessage() + "(Input value: " + endTime + ")", 502);
+            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
         }
+        aTimeDifference = timeInMin/60.0;
 
-        aTimeDifference = (endTimeMin - startTimeMin)/60.0;
+        timeToEvaluate = endTime;
+        errorCode = 502;
+
+        try {
+            positionOfColon = timeToEvaluate.indexOf(':');
+            if (positionOfColon > 0) {
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
+                int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
+                timeInMin = timeHH*60 + timeMM;
+            }
+        } catch (Exception e) {
+            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
+        }
+        aTimeDifference = timeInMin/60.0 - aTimeDifference;
 
         if (aTimeDifference < 0.0) {
             throw new TimePairException("Invalid time period " +
