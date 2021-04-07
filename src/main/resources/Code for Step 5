@@ -19,9 +19,9 @@
 
 // In Datei TimePairTest.java
 
-package tddshowcasetestpackage;
+package staticanalysisshowcasetestpackage;
 
-import tddshowcasepackage.*;
+import staticanalysisshowcasepackage.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -56,7 +56,7 @@ public class TimePairTest {
 
 // In Datei TimePair.java
 
-package tddshowcasepackage;
+package staticanalysisshowcasepackage;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;

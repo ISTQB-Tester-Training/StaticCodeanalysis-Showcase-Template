@@ -1,6 +1,6 @@
-package tddshowcasetestpackage;
+package staticanalysisshowcasetestpackage;
 
-import tddshowcasepackage.*;
+import staticanalysisshowcasepackage.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ public class TimePairTest {
 
     @Test
     public void timeDifferenceTest_1h () {
-        assertEquals(1.0, aTimePair.getTimeDifference("10:00", "11:00"), 0.0);
+        assertEquals(1.0, aTimePair.getTimeDifference("10:30", "11:30"), 0.0);
     }
 
     @Test

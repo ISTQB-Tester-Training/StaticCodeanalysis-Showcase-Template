@@ -1,29 +1,36 @@
-package tddshowcasepackage;
-
-import java.time.*;
-import java.time.temporal.ChronoUnit;
+package staticanalysisshowcasepackage;
 
 public class TimePair {
 
     public double getTimeDifference(String startTime, String endTime) {
 
-        try { LocalTime.parse(startTime);
-        }
-        catch (Exception e) {
+        double aTimeDifference;
+
+        int positionOfColon = -1, startTimeMin = 0, endTimeMin = 0;
+
+        try {
+            positionOfColon = startTime.indexOf(':');
+            if (positionOfColon > 0) {
+                int startTimeHH = Integer.parseInt(startTime.substring(0, positionOfColon));
+                int startTimeMM = Integer.parseInt(startTime.substring(positionOfColon + 1));
+                startTimeMin = startTimeHH*60 + startTimeMM;
+            }
+        } catch (Exception e) {
             throw new TimePairException(e.getMessage() + "(Input value: " + startTime + ")", 501);
         }
 
-        try { LocalTime.parse(endTime);
-        }
-        catch (Exception e) {
+        try {
+            positionOfColon = startTime.indexOf(':');
+            if (positionOfColon > 0) {
+                int endTimeHH = Integer.parseInt(endTime.substring(0, positionOfColon));
+                int endTimeMM = Integer.parseInt(endTime.substring(positionOfColon + 1));
+                endTimeMin = endTimeHH*60 +  endTimeMM;
+            }
+        } catch (Exception e) {
             throw new TimePairException(e.getMessage() + "(Input value: " + endTime + ")", 502);
         }
 
-        double aTimeDifference = LocalTime.parse(startTime).until(LocalTime.parse(endTime), ChronoUnit.MINUTES)/60.0;
-
-        // Hier die Zeitdifferenz manuell implementieren!
-
-
+        aTimeDifference = (endTimeMin - startTimeMin)/60.0;
 
         if (aTimeDifference < 0.0) {
             throw new TimePairException("Invalid time period " +
@@ -48,7 +55,7 @@ public class TimePair {
             pauseTime = 0.5;
         } else if (timeDifference > 9.5 && timeDifference <= 9.75) {
             pauseTime = timeDifference - 9.0;
-        } else if (timeDifference < 9.75) {
+        } else if (timeDifference > 9.75) {
             pauseTime = 0.75;
         }
 

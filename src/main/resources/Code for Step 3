@@ -13,9 +13,9 @@
 
 // In Datei TimePairTest.java
 
-package tddshowcasetestpackage;
+package staticanalysisshowcasetestpackage;
 
-import tddshowcasepackage.*;
+import staticanalysisshowcasepackage.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

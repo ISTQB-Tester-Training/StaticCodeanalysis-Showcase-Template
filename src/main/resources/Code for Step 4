@@ -11,7 +11,7 @@
 
 // In Datei TimePair.java
 
-package tddshowcasepackage;
+package staticanalysisshowcasepackage;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
