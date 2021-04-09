@@ -11,6 +11,7 @@ public class TimePair {
         String timeToEvaluate = startTime;
         long errorCode = 501;
 
+
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
             if (positionOfColon > 0) {
