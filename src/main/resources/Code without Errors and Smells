@@ -1,37 +1,88 @@
-// Im Step 3 wird der zweite Test geschrieben. Das entpricht dem Schritt rot im Red-Green-Refactoring-Cycle.
-// Es wird die Zeitdifferenz für ein zweites Zeitpaar berechnet. Die Zeitdifferenz wird einfach als 0 Stunde angenommen.
-// Das ist praktisch ein Grenzwerttest.
+package staticanalysisshowcasepackage;
 
-// Das ist wichtig:
-// Die Funktionalität an sich existiert bereits, deshalb zeigt der Editor keine roten Unterringelungen an.
-// Der Testlauf schlägt aber trotzdem fehlt, weil im produktiven Code der Rückgabewert 1 fest eingetragen ist.
-// Die assertEquals-Funktion zeigt dies dann auch so an.
+public class TimePair {
 
-// Schritt 3.1 Code in die Datei TimePairTest.java kopieren.
-// Schritt 1.2 Test code ausführen (-> führt zu Fehler)
-// Schritt 1.3 Code committen (Commit-Meldung "Comit nach Step 1") und ins GitHub-Repository pushen
+    public double getTimeDifference(String startTime, String endTime) {
 
-// In Datei TimePairTest.java
+        double aTimeDifference;
 
-package staticanalysisshowcasetestpackage;
+        int positionOfColon = -1;
+        int timeInMin = 0;
 
-import staticanalysisshowcasepackage.*;
-import org.junit.Test;
-import static org.junit.Assert.*;
+        String timeToEvaluate = startTime;
+        long errorCode = 501;
 
-public class TimePairTest {
+        try {
+            positionOfColon = timeToEvaluate.indexOf(':');
+            if (positionOfColon > 0) {
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
+                int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
+                timeInMin = timeHH*60 + timeMM;
+            }
+        } catch (Exception e) {
+            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
+        }
+        aTimeDifference = timeInMin/60.0;
 
-    TimePair aTimePair = new TimePair();
+        timeToEvaluate = endTime; errorCode = 502;
 
-    @Test
-    public void timeDifferenceTest_1h () {
-        aTimePair.setTimeValues("10:00", "11:00");
-        assertEquals(1.0, aTimePair.getTimeDifference(), 0.0);
+        try {
+            positionOfColon = timeToEvaluate.indexOf(':');
+            if (positionOfColon > 0) {
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
+                int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
+                timeInMin = timeHH*60 + timeMM;
+            }
+        } catch (Exception e) {
+            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
+        }
+        aTimeDifference = timeInMin/60.0 - aTimeDifference;
+
+        if (aTimeDifference < 0.0) {
+            throw new TimePairException("Invalid time period " +
+                    startTime + " / " +
+                    endTime +
+                    " time difference " + aTimeDifference + " hours", 503);
+        }
+        return aTimeDifference;
     }
 
-    @Test
-    public void timeDifferenceTest_0h () {
-       aTimePair.setTimeValues("10:00", "10:00");
-       assertEquals(0.0, aTimePair.getTimeDifference(), 0.0);
+    public double getPauseTime(String startTime, String endTime) {
+
+        double timeDifference = new TimePair().getTimeDifference(startTime, endTime);
+
+        double pauseTime = 0.0;
+
+        if (timeDifference <= 6.0) {
+            pauseTime = 0.0;
+        } else if (timeDifference > 6.0 && timeDifference <= 6.5) {
+            pauseTime = timeDifference - 6.0;
+        } else if (timeDifference > 6.5 && timeDifference <= 9.5) {
+            pauseTime = 0.5;
+        } else if (timeDifference > 9.5 && timeDifference <= 9.75) {
+            pauseTime = timeDifference - 9.0;
+        } else if (timeDifference > 9.75) {
+            pauseTime = 0.75;
+        }
+
+        return pauseTime;
+    }
+
+    public class TimePairException extends RuntimeException {
+        private final String message;
+        private final Long messageNr;
+
+        public TimePairException (String argMessage, long argMessageNr) {
+            super(argMessage);
+            message = argMessage;
+            messageNr = argMessageNr;
+        }
+        public String getMessageText() {
+            return message;
+        }
+        public Long getMessageNr() {
+            return messageNr;
+        }
     }
 }
+
