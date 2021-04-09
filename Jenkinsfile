@@ -6,9 +6,16 @@ pipeline {
             steps {
 
                 git 'https://github.com/ISTQB-Tester-Training/StaticCodeanalysis-Showcase-Template.git'
+
+                sh "mvn compile"
             }
         }
+        stage('Unit Test') {
+            steps {
 
+               sh "mvn test"
+            }
+        }
         stage('Code Analysis') {
             steps {
 
