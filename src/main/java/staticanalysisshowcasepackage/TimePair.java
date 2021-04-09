@@ -9,7 +9,8 @@ public class TimePair {
         int positionOfColon = -1;
         int timeInMin = 0;
 
-        String timeToEvaluate = startTime; long errorCode = 501;
+        String timeToEvaluate = startTime;
+        long errorCode = 501;
 
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
