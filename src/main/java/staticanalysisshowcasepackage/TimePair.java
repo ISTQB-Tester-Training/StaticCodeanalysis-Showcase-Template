@@ -14,7 +14,7 @@ public class TimePair {
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
             if (positionOfColon > 0) {
-                int timeHH = Integer.parseInt(timeToEvaluate.substring(1, positionOfColon));
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
                 int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
                 timeInMin = timeHH*60 + timeMM;
             }
