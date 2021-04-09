@@ -6,8 +6,7 @@ public class TimePair {
 
         int aTimeDifference;
 
-        int positionOfColon = -1;
-        int timeInMin = 0;
+        int positionOfColon = -1; int timeInMin = 0;
 
         String timeToEvaluate = startTime;
         long errorCode = 501;
