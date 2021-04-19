@@ -41,7 +41,7 @@ public class TimePairSCA {
             throw new TimePairSCAException("Invalid time period " +
                     startTime + " / " +
                     endTime +
-                    " time difference " + aTimeDifference + " hours", 503);
+                    " time difference " + aTimeDifference + " hours", 503)
         }
         return aTimeDifference;
     }
