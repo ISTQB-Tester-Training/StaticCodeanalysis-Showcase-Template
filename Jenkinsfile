@@ -7,7 +7,7 @@ pipeline {
 
                 git 'https://github.com/ISTQB-Tester-Training/StaticCodeanalysis-Showcase-Template.git'
 
-                sh "mvn sonar:sonar -Dsonar.host.url=http://ctp-tester-training.tk:30002/"
+                sh "mvn clean sonar:sonar -Dsonar.host.url=http://ctp-tester-training.tk:30002/"
             }
         }
     }
