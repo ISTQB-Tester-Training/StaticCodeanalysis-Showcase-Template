@@ -4,9 +4,9 @@ import staticanalysisshowcasepackage.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TimePairTest {
+public class TimePairSCATest {
 
-    TimePair aTimePair = new TimePair();
+    TimePairSCA aTimePair = new TimePairSCA();
 
     @Test
     public void timeDifferenceTest_1h () {
@@ -21,34 +21,34 @@ public class TimePairTest {
     @Test
     public void timeDifferenceTest_invalidStartTimeFormat() {
 
-        TimePair.TimePairException aTimePairException = assertThrows(TimePair.TimePairException.class,
+        TimePairSCA.TimePairSCAException aTimePairSCAException = assertThrows(TimePairSCA.TimePairSCAException.class,
                 () -> aTimePair.getTimeDifference("SS:00", "11:00"));
 
-        assertEquals(501, (long) aTimePairException.getMessageNr());
-        System.out.println("Invalid START Time - Error Number: " + aTimePairException.getMessageNr() + " " +
-                "Error text: " + aTimePairException.getMessageText());
+        assertEquals(501, (long) aTimePairSCAException.getMessageNr());
+        System.out.println("Invalid START Time - Error Number: " + aTimePairSCAException.getMessageNr() + " " +
+                "Error text: " + aTimePairSCAException.getMessageText());
     }
 
     @Test
     public void timeDifferenceTest_invalidEndTimeFormat() {
 
-        TimePair.TimePairException aTimePairException = assertThrows(TimePair.TimePairException.class,
+        TimePairSCA.TimePairSCAException aTimePairSCAException = assertThrows(TimePairSCA.TimePairSCAException.class,
                 () -> aTimePair.getTimeDifference("11:00", "EE:00"));
 
-        assertEquals(502, (long) aTimePairException.getMessageNr());
-        System.out.println("Invalid END Time - Error Number: " + aTimePairException.getMessageNr() + " " +
-                "Error text: " + aTimePairException.getMessageText());
+        assertEquals(502, (long) aTimePairSCAException.getMessageNr());
+        System.out.println("Invalid END Time - Error Number: " + aTimePairSCAException.getMessageNr() + " " +
+                "Error text: " + aTimePairSCAException.getMessageText());
     }
 
     @Test
     public void timeDifferenceTest_invalidTimePeriod() {
 
-        TimePair.TimePairException aTimePairException = assertThrows(TimePair.TimePairException.class,
+        TimePairSCA.TimePairSCAException aTimePairSCAException = assertThrows(TimePairSCA.TimePairSCAException.class,
                 () -> aTimePair.getTimeDifference("19:00", "03:00"));
 
-        assertEquals(503, (long) aTimePairException.getMessageNr());
-        System.out.println("Invalid TIME PERIOD - Error Number: " + aTimePairException.getMessageNr() + " " +
-                "Error text: " + aTimePairException.getMessageText());
+        assertEquals(503, (long) aTimePairSCAException.getMessageNr());
+        System.out.println("Invalid TIME PERIOD - Error Number: " + aTimePairSCAException.getMessageNr() + " " +
+                "Error text: " + aTimePairSCAException.getMessageText());
     }
 
     @Test

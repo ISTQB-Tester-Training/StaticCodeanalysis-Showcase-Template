@@ -7,16 +7,10 @@ pipeline {
 
                 git 'https://github.com/ISTQB-Tester-Training/StaticCodeanalysis-Showcase-Template.git'
 
-                sh "mvn compile"
-            }
-        }
-        stage('Unit Test') {
-            steps {
 
-               sh "mvn test"
             }
         }
-        stage('Code Analysis') {
+
             steps {
 
                 sh "mvn sonar:sonar -Dsonar.host.url=http://ctp-tester-training.tk:30002/"

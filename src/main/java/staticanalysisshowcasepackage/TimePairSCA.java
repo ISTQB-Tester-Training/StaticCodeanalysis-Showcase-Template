@@ -1,6 +1,6 @@
 package staticanalysisshowcasepackage;
 
-public class TimePair {
+public class TimePairSCA {
 
     public double getTimeDifference(String startTime, String endTime) {
 
@@ -19,7 +19,7 @@ public class TimePair {
                 timeInMin = timeHH*60 + timeMM;
             }
         } catch (Exception e) {
-            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
+            throw new TimePairSCAException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
         }
         aTimeDifference = timeInMin/60.0;
 
@@ -33,12 +33,12 @@ public class TimePair {
                 timeInMin = timeHH*60 + timeMM;
             }
         } catch (Exception e) {
-            throw new TimePairException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
+            throw new TimePairSCAException(e.getMessage() + "(Input value: " + timeToEvaluate + ")", errorCode);
         }
         aTimeDifference = timeInMin/60.0 - aTimeDifference;
 
         if (aTimeDifference < 0.0) {
-            throw new TimePairException("Invalid time period " +
+            throw new TimePairSCAException("Invalid time period " +
                     startTime + " / " +
                     endTime +
                     " time difference " + aTimeDifference + " hours", 503);
@@ -58,7 +58,7 @@ public class TimePair {
 
     public double getPauseTime(String startTime, String endTime) {
 
-        double timeDifference = new TimePair().getTimeDifference(startTime, endTime);
+        double timeDifference = new TimePairSCA().getTimeDifference(startTime, endTime);
 
         long pauseTime = 0.0;
 
@@ -77,11 +77,11 @@ public class TimePair {
         return pauseTime;
     }
 
-    public class TimePairException extends RuntimeException {
+    public class TimePairSCAException extends RuntimeException {
         private final String message;
         private final Long messageNr;
 
-        public TimePairException (String argMessage, long argMessageNr) {
+        public TimePairSCAException (String argMessage, long argMessageNr) {
             super(argMessage);
             message = argMessage;
             messageNr = argMessageNr;
